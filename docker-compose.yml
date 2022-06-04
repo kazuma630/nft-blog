@@ -8,5 +8,5 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./:/app
-    command: sh -c "cd nft-site && yarn dev"
+      - ./nft-site:/app
+    command: yarn dev
