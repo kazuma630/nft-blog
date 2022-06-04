@@ -1,0 +1,12 @@
+version: "3"
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    command: sh -c "cd nft-site && yarn dev"
