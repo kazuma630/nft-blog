@@ -1,9 +1,14 @@
+import createDOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
 import { client } from '../../libs/client';
 import type { Blogs } from '../../types/blogs';
 
 type Blog = {
   blog: Blogs;
 };
+
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window as any);
 
 export default function BlogId({ blog }: Blog) {
   return (
@@ -12,7 +17,7 @@ export default function BlogId({ blog }: Blog) {
       <p>{blog.publishedAt}</p>
       <div
         dangerouslySetInnerHTML={{
-          __html: `${blog.body}`
+          __html: DOMPurify.sanitize(blog.body)
         }}
       />
     </main>
